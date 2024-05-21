@@ -7,6 +7,11 @@
   font-family: "Azeret Mono", monospace;
 }
 
+h1 {
+  color: variables.$orange-light;
+  @include variables.font-style($font-weight: variables.$font-bold, $font-size: variables.$font-size-bold)
+}
+
 h2 {
   color: variables.$red-dark;
   @include variables.font-style($font-weight: variables.$font-semi-bold, $font-size: variables.$font-size-semi-bold)
@@ -20,6 +25,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: variables.$red-fuchsia-dark;
 
   &-navbar {
     height: 100%;
@@ -33,6 +39,11 @@ h2 {
 
       &-item {
         margin: 0 1.2rem;
+
+        .icon-svg {
+          width: 24px;
+          stroke: variables.$orange-boring;
+        }
       }
 
       img {
@@ -42,4 +53,10 @@ h2 {
       }
     }
   }
+}
+
+.carousel-movies {
+  display: flex;
+  gap: 16px;
+  padding: 0 16px;
 }

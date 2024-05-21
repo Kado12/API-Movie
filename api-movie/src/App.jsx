@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { FireIcon } from '@heroicons/react/24/outline'
+import { TagIcon } from '@heroicons/react/24/outline'
+import { NewspaperIcon } from '@heroicons/react/24/outline'
+import { PlayIcon } from '@heroicons/react/24/outline'
 
 function App() {
   const [trendingMovies, setTrendingMovies] = useState('')
@@ -10,7 +14,7 @@ function App() {
       url: 'https://api.themoviedb.org/3/trending/movie/day?language=es',
       headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NWU3MGZiNDE3ZjYwNmIwYjkzNGRlOGRmODFkODlhZSIsInN1YiI6IjY2NDdhNDA3OTVkYzU5ZDQ3MWI1M2EwOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._6bYTf5Q3wRr4Gd3VzUIfP7hD_GjDa2lDNSzE6E1bFI'
+        Authorization: import.meta.env.VITE_MY_TOKEN,
       }
     }
 
@@ -33,28 +37,27 @@ function App() {
         <nav className='header-navbar'>
           <ul className='header-navbar-list'>
             <li className='header-navbar-list-item'>
-              <img src="/Trending.svg" alt="Películas más votadas" />
+              <FireIcon className='icon-svg' />
             </li>
             <li className='header-navbar-list-item'>
-              <img src="/Tags.svg" alt="Categorías de las películas" />
+              <TagIcon className='icon-svg' />
             </li>
             <li className='header-navbar-list-item'>
-              <img src="/News.svg" alt="Novedades" />
+              <NewspaperIcon className='icon-svg' />
             </li>
             <li className='header-navbar-list-item'>
-              <img src="/Play.svg" alt="Películas más votadas" />
-              <span></span>
+              <PlayIcon className='icon-svg' />
             </li>
           </ul>
         </nav>
       </header>
+      <h1>Trending</h1>
       <div className='carousel-movies'>
         {!trendingMovies || trendingMovies.map((movie) => (
 
-          <div key={movie.id} className='carousel-items'>
-            <h2 id={movie.id}>{movie.title}</h2>
+          <figure key={movie.id} className='carousel-items'>
             <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.original_title} />
-          </div>
+          </figure>
 
         ))}
       </div>
