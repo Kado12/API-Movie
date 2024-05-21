@@ -1,0 +1,45 @@
+@use './Partials/variables';
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 10px;
+  font-family: "Azeret Mono", monospace;
+}
+
+h2 {
+  color: variables.$red-dark;
+  @include variables.font-style($font-weight: variables.$font-semi-bold, $font-size: variables.$font-size-semi-bold)
+}
+
+.header {
+  min-width: 320px;
+  width: 100vw;
+  height: 48px;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-navbar {
+    height: 100%;
+    display: flex;
+
+    &-list {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &-item {
+        margin: 0 1.2rem;
+      }
+
+      img {
+        width: 20px;
+        height: 20px;
+        fill: aqua;
+      }
+    }
+  }
+}

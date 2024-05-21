@@ -1,0 +1,30 @@
+$red-soft: #FF5B5B;
+$red-normal: #BF3030;
+$red-fuchsia: #C11B39;
+$red-fuchsia-dark: #8C1127;
+$red-dark: #400913;
+$red-very-dark: #2B0008;
+$orange-boring: #BF8F54;
+$orange-soft: #FFD096;
+$orange-light: #D9C8B4;
+$orange-pale: #FFECD6;
+$gray-soft: #BCBCBC;
+$gray-dark: #444444;
+$white: #FFFFFF;
+$black: #000000;
+
+$font-bold: 700;
+$font-semi-bold: 600;
+$font-regular: 400;
+$font-extra-light: 200;
+
+$font-size-bold: 3.2rem;
+$font-size-semi-bold: 2.4rem;
+$font-size-regular: 2rem;
+$font-size-extra-light: 1.6rem;
+$font-size-extra-light-credits: 1.2rem;
+
+@mixin font-style($font-weight: $font-bold, $font-size: $font-size-bold) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+}
