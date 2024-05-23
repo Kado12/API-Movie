@@ -17,14 +17,22 @@ h2 {
   @include variables.font-style($font-weight: variables.$font-semi-bold, $font-size: variables.$font-size-semi-bold)
 }
 
+h3 {
+  color: variables.$red-dark;
+  @include variables.font-style($font-weight: variables.$font-regular, $font-size: variables.$font-size-regular)
+}
+
+p {
+  color: variables.$black;
+  @include variables.font-style($font-weight: variables.$font-extra-light, $font-size: variables.$font-size-extra-light)
+}
+
 .header {
   min-width: 320px;
   width: 100vw;
   height: 48px;
   padding: 8px 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include variables.flex-container($justify: space-between);
   background-color: variables.$red-fuchsia-dark;
 
   &-navbar {
@@ -33,9 +41,7 @@ h2 {
 
     &-list {
       list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include variables.flex-container($justify: space-between);
 
       &-item {
         margin: 0 1.2rem;
@@ -55,8 +61,151 @@ h2 {
   }
 }
 
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% + 100vw));
+  }
+}
+
 .carousel-movies {
+  overflow: hidden;
+  padding: 0 10px;
+
+  &-container {
+    width: fit-content;
+    display: flex;
+    animation: 35s slide infinite linear;
+  }
+}
+
+.genres-movies {
+  @include variables.flex-container($gap: 16px, $wrap: wrap, $justify: space-around);
+  width: 100%;
+  padding: 16px 10px;
+
+  &-item {
+    @include variables.flex-container();
+    width: 120px;
+    padding: 8px;
+    height: 44px;
+    border-radius: 8px;
+    background-color: variables.$red-fuchsia;
+
+    p {
+      text-align: center;
+    }
+  }
+}
+
+.options {
+  @include variables.flex-container($direction: column);
+  width: 100%;
+  overflow: hidden;
+
+  &-button {
+    border-radius: 22px;
+    width: 300px;
+    height: 44px;
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    background-color: variables.$orange-boring;
+
+    &--left {
+      left: 0;
+    }
+
+    &--right {
+      right: 0;
+    }
+
+    &--absolute {
+      border-radius: 22px;
+      z-index: 0;
+      width: 50%;
+      position: absolute;
+      height: 100%;
+      background-color: variables.$red-fuchsia-dark;
+    }
+
+    &-item {
+      z-index: 2;
+      width: 50%;
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      font-size: variables.$font-size-extra-light;
+    }
+  }
+
+  &-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    &-now {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &-popular {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+}
+
+.footer {
+  width: 100%;
+  background-color: variables.$red-fuchsia-dark;
   display: flex;
-  gap: 16px;
-  padding: 0 16px;
+  height: 160px;
+  flex-wrap: wrap;
+
+  &-links {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    &-list {
+      list-style: none;
+      padding: 0;
+
+      &-item {
+        margin: 8px 0;
+        font-size: variables.$font-size-extra-light-credits;
+      }
+    }
+  }
+
+  &-credits {
+    width: 50%;
+    text-align: center;
+    margin: auto;
+  }
+
+  &-author {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+  }
+}
+
+.inactive {
+  display: none;
 }

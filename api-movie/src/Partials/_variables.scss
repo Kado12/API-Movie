@@ -28,3 +28,12 @@ $font-size-extra-light-credits: 1.2rem;
   font-weight: $font-weight;
   font-size: $font-size;
 }
+
+@mixin flex-container($direction: row, $gap: 0, $justify: center, $align: center, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  gap: $gap;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}

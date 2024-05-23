@@ -1,32 +1,51 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useState } from 'react'
+import useAxios from './Hooks/useAxios'
+/* Icons */
 import { FireIcon } from '@heroicons/react/24/outline'
 import { TagIcon } from '@heroicons/react/24/outline'
 import { NewspaperIcon } from '@heroicons/react/24/outline'
 import { PlayIcon } from '@heroicons/react/24/outline'
+/* URL */
+const urlMovies = import.meta.env.VITE_MY_URL
 
 function App() {
   const [trendingMovies, setTrendingMovies] = useState('')
+  const [genresMovies, setGenresMovies] = useState('')
+  const [nowMovies, setNowMovies] = useState('')
+  const [popularMovies, setPopularMovies] = useState('')
+  const [changeMovie, setChangeMovie] = useState(false)
+  const { loadingTrending, errorTrending } = useAxios(`${urlMovies}movie/top_rated?language=en-US`, setTrendingMovies)
+  const { loadingGenres, errorGenres } = useAxios(`${urlMovies}genre/movie/list?language=en-US`, setGenresMovies)
+  const { loadingNow, errorNow } = useAxios(`${urlMovies}movie/now_playing?language=en-US`, setNowMovies)
+  const { loadingPopular, errorPopular } = useAxios(`${urlMovies}movie/popular?language=en-US`, setPopularMovies)
 
-  useEffect(() => {
-    const options = {
-      method: 'GET',
-      url: 'https://api.themoviedb.org/3/trending/movie/day?language=es',
-      headers: {
-        accept: 'application/json',
-        Authorization: import.meta.env.VITE_MY_TOKEN,
-      }
+  if (loadingGenres || loadingTrending || loadingNow || loadingPopular) {
+    return (
+      <h1>Cargando datos...</h1>
+    )
+  } else if (errorGenres || errorTrending || errorNow || errorPopular) {
+    return (
+      <h1>Error al cargar los datos...</h1>
+    )
+  }
+
+  const ifChangeMovies = () => {
+    const buttonAbsolute = document.querySelector('.options-button--absolute')
+    const optionContainerNow = document.querySelector('.options-container-now')
+    const optionContainerPopular = document.querySelector('.options-container-popular')
+    buttonAbsolute.classList.toggle('options-button--left');
+    buttonAbsolute.classList.toggle('options-button--right');
+    if (changeMovie) {
+      setChangeMovie(false)
+      optionContainerNow.classList.toggle('inactive')
+      optionContainerPopular.classList.toggle('inactive')
+    } else {
+      setChangeMovie(true)
+      optionContainerPopular.classList.toggle('inactive')
+      optionContainerNow.classList.toggle('inactive')
     }
+  }
 
-    axios
-      .request(options)
-      .then(function (response) {
-        setTrendingMovies(response.data.results);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
 
   return (
     <>
@@ -51,16 +70,75 @@ function App() {
           </ul>
         </nav>
       </header>
-      <h1>Trending</h1>
-      <div className='carousel-movies'>
-        {!trendingMovies || trendingMovies.map((movie) => (
+      <main className='main'>
+        <h1>Trending</h1>
+        <section className='carousel-movies'>
+          <div className='carousel-movies-container'>
+            {trendingMovies && trendingMovies.results.map((movie) => (
+              <figure key={movie.id} className='carousel-items'>
+                <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.original_title} />
+              </figure>
 
-          <figure key={movie.id} className='carousel-items'>
-            <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.original_title} />
-          </figure>
+            ))}
+          </div>
+        </section>
+        <h1>Categories</h1>
+        <section className='genres-movies'>
+          {genresMovies && genresMovies.genres.map((genre) => (
 
-        ))}
-      </div>
+            <div key={genre.id} id={genre.id} className={`genres-movies-item genres-movies-item--${genre.name.toLowerCase()}`} >
+              <p>{genre.name}</p>
+            </div>
+
+          ))}
+        </section>
+        <h1>Now and Popular</h1>
+        <section className='options'>
+          <div className='options-button'>
+            <div className='options-button--absolute options-button--left'></div>
+            <button className='options-button-item options-button-item--now' onClick={() => {
+              ifChangeMovies()
+            }}>Novedades</button>
+            <button className='options-button-item options-button-item--popular' onClick={() => {
+              ifChangeMovies()
+            }}>Populares</button>
+          </div>
+          <div className='options-container'>
+            <div className='options-container-now inactive'>
+              {nowMovies && nowMovies.results.map((now) => (
+                <figure key={now.id} >
+                  <img src={`https://image.tmdb.org/t/p/w200/${now.poster_path}`} alt={now.original_title} />
+                </figure>
+
+              ))}
+            </div>
+            <div className='options-container-popular'>
+              {popularMovies && popularMovies.results.map((popular) => (
+                <figure key={popular.id} >
+                  <img src={`https://image.tmdb.org/t/p/w200/${popular.poster_path}`} alt={popular.original_title} />
+                </figure>
+
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer className='footer'>
+        <div className='footer-links'>
+          <ul className='footer-links-list'>
+            <li className='footer-links-list-item'>Whatsapp</li>
+            <li className='footer-links-list-item'>GMail</li>
+            <li className='footer-links-list-item'>GitHub</li>
+            <li className='footer-links-list-item'>Linkedin</li>
+          </ul>
+        </div>
+        <div className='footer-credits'>
+          <p>Créditos a la API The Movie DB</p>
+        </div>
+        <div className='footer-author'>
+          <h3>Hecho por Kado © 2024</h3>
+        </div>
+      </footer>
     </>
   )
 }
