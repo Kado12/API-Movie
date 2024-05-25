@@ -5,6 +5,10 @@ import { FireIcon } from '@heroicons/react/24/outline'
 import { TagIcon } from '@heroicons/react/24/outline'
 import { NewspaperIcon } from '@heroicons/react/24/outline'
 import { PlayIcon } from '@heroicons/react/24/outline'
+import { PhoneIcon } from '@heroicons/react/24/outline'
+import { EnvelopeIcon } from '@heroicons/react/24/outline'
+import { CodeBracketIcon } from '@heroicons/react/24/outline'
+import { UserIcon } from '@heroicons/react/24/outline'
 /* URL */
 const urlMovies = import.meta.env.VITE_MY_URL
 
@@ -82,7 +86,7 @@ function App() {
             ))}
           </div>
         </section>
-        <h1>Categories</h1>
+        <h2>Categories</h2>
         <section className='genres-movies'>
           {genresMovies && genresMovies.genres.map((genre) => (
 
@@ -92,7 +96,7 @@ function App() {
 
           ))}
         </section>
-        <h1>Now and Popular</h1>
+        <h2>Now and Popular</h2>
         <section className='options'>
           <div className='options-button'>
             <div className='options-button--absolute options-button--left'></div>
@@ -104,7 +108,7 @@ function App() {
             }}>Populares</button>
           </div>
           <div className='options-container'>
-            <div className='options-container-now inactive'>
+            <div className='options-container-now'>
               {nowMovies && nowMovies.results.map((now) => (
                 <figure key={now.id} >
                   <img src={`https://image.tmdb.org/t/p/w200/${now.poster_path}`} alt={now.original_title} />
@@ -112,7 +116,7 @@ function App() {
 
               ))}
             </div>
-            <div className='options-container-popular'>
+            <div className='options-container-popular inactive'>
               {popularMovies && popularMovies.results.map((popular) => (
                 <figure key={popular.id} >
                   <img src={`https://image.tmdb.org/t/p/w200/${popular.poster_path}`} alt={popular.original_title} />
@@ -126,10 +130,10 @@ function App() {
       <footer className='footer'>
         <div className='footer-links'>
           <ul className='footer-links-list'>
-            <li className='footer-links-list-item'>Whatsapp</li>
-            <li className='footer-links-list-item'>GMail</li>
-            <li className='footer-links-list-item'>GitHub</li>
-            <li className='footer-links-list-item'>Linkedin</li>
+            <li className='footer-links-list-item'><a href='https://wa.me/+51912151197' target='_blank'><PhoneIcon className='item-icon' /> Whatsapp</a></li>
+            <li className='footer-links-list-item'><a ><EnvelopeIcon className='item-icon' href='mailto:gonzalosh01@gmail.com' />GMail</a></li>
+            <li className='footer-links-list-item'><a href='https://github.com/Kado12' target='_blank' ><CodeBracketIcon className='item-icon' />GitHub</a></li>
+            <li className='footer-links-list-item'><a href='https://www.linkedin.com/in/gonzalo-sotelo-kd12/' target='_blank'><UserIcon className='item-icon' />Linkedin</a></li>
           </ul>
         </div>
         <div className='footer-credits'>

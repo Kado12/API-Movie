@@ -7,30 +7,37 @@
   font-family: "Azeret Mono", monospace;
 }
 
+body {
+  background-color: variables.$red-fuchsia;
+  color: variables.$orange-soft;
+  text-align: center;
+}
+
 h1 {
-  color: variables.$orange-light;
-  @include variables.font-style($font-weight: variables.$font-bold, $font-size: variables.$font-size-bold)
+  color: variables.$orange-soft;
+  @include variables.font-style($font-weight: variables.$font-bold, $font-size: variables.$font-size-bold);
+  margin: 16px 0;
 }
 
 h2 {
-  color: variables.$red-dark;
-  @include variables.font-style($font-weight: variables.$font-semi-bold, $font-size: variables.$font-size-semi-bold)
+  color: variables.$orange-soft;
+  @include variables.font-style($font-weight: variables.$font-semi-bold, $font-size: variables.$font-size-semi-bold);
+  margin: 16px 0;
 }
 
 h3 {
-  color: variables.$red-dark;
+  color: variables.$orange-soft;
   @include variables.font-style($font-weight: variables.$font-regular, $font-size: variables.$font-size-regular)
 }
 
 p {
-  color: variables.$black;
+  color: variables.$orange-soft;
   @include variables.font-style($font-weight: variables.$font-extra-light, $font-size: variables.$font-size-extra-light)
 }
 
 .header {
   min-width: 320px;
-  width: 100vw;
-  height: 48px;
+  height: 56px;
   padding: 8px 10px;
   @include variables.flex-container($justify: space-between);
   background-color: variables.$red-fuchsia-dark;
@@ -48,7 +55,7 @@ p {
 
         .icon-svg {
           width: 24px;
-          stroke: variables.$orange-boring;
+          stroke: variables.$orange-soft;
         }
       }
 
@@ -89,13 +96,13 @@ p {
 
   &-item {
     @include variables.flex-container();
-    width: 120px;
-    padding: 8px;
-    height: 44px;
+    width: 160px;
+    height: 48px;
     border-radius: 8px;
-    background-color: variables.$red-fuchsia;
+    background-color: variables.$orange-soft;
 
     p {
+      color: variables.$red-very-dark;
       text-align: center;
     }
   }
@@ -113,14 +120,15 @@ p {
     display: flex;
     position: relative;
     justify-content: space-around;
-    background-color: variables.$orange-boring;
+    background-color: variables.$orange-soft;
+    margin-bottom: 16px;
 
     &--left {
-      left: 0;
+      left: -1px;
     }
 
     &--right {
-      right: 0;
+      right: -1px;
     }
 
     &--absolute {
@@ -133,6 +141,7 @@ p {
     }
 
     &-item {
+      color: variables.$red-very-dark;
       z-index: 2;
       width: 50%;
       border: none;
@@ -150,21 +159,27 @@ p {
     padding: 10px;
 
     &-now {
+      @include variables.flex-container($wrap: wrap, $gap: 16px);
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
+      padding: 16px;
+      background-color: variables.$red-fuchsia-dark;
     }
 
     &-popular {
+      @include variables.flex-container($wrap: wrap, $gap: 16px);
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
+      padding: 16px;
+      background-color: variables.$red-fuchsia-dark;
+    }
+
+    figure {
+      padding: 8px;
+      background-color: variables.$orange-soft;
+      border-radius: 16px 0;
+
+      img {
+        border-radius: 12px 0;
+      }
     }
   }
 }
@@ -185,10 +200,23 @@ p {
     &-list {
       list-style: none;
       padding: 0;
+      text-align: start;
 
       &-item {
         margin: 8px 0;
-        font-size: variables.$font-size-extra-light-credits;
+
+        a {
+          font-size: variables.$font-size-extra-light-credits;
+          display: flex;
+          gap: 16px;
+          align-items: center;
+          color: variables.$orange-soft;
+          text-decoration: none;
+        }
+
+        .item-icon {
+          width: 16px;
+        }
       }
     }
   }
